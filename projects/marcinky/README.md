@@ -1,2 +1,2 @@
 #Yvonne Marcinko, marcinky
-This is my assignement-2 submission! 
+This is my assignement-2 submission! (Using school server)
