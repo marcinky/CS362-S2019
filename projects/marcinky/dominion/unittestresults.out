@@ -1,0 +1,284 @@
+
+----------------- Testing Card: adventurer ----------------
+
+	TEST: Refactored Function
+	hand count = 8, expected = 7
+	deck count = 4, expected = 3
+
+ >>>>>  TEST FAILED  <<<<<
+  item: (testG.handCount[thisPlayer] - newCards == G.handCount[thisPlayer] + newCards)
+  function: main
+  file: unittest1.c
+  line: 65
+
+ >>>>>  TEST FAILED  <<<<<
+  item: (testG.deckCount[thisPlayer] + newCards == G.deckCount[thisPlayer] - newCards)
+  function: main
+  file: unittest1.c
+  line: 67
+
+
+ >>>>> Testing complete for: adventurer <<<<<
+
+
+----------------- Testing Card: council_room ----------------
+
+	TEST 2: Refactored Function
+	hand count = 8, expected = 8
+	deck count = 1, expected = 1
+	buy count  = 2, expected = 2
+
+	Next Player
+	hand count = 0, expected = 1
+	deck count = 10, expected = 9
+
+ >>>>>  TEST PASSED  <<<<<
+  item: (testG.handCount[thisPlayer] == G.handCount[thisPlayer] + newCards - discarded)
+
+ >>>>>  TEST PASSED  <<<<<
+  item: (testG.deckCount[thisPlayer] == G.deckCount[thisPlayer] - newCards)
+
+ >>>>>  TEST PASSED  <<<<<
+  item: (testG.numBuys == G.numBuys + buy)
+
+ >>>>>  TEST FAILED  <<<<<
+  item: (testG.handCount[nextPlayer] == G.handCount[nextPlayer] + 1)
+  function: main
+  file: unittest2.c
+  line: 81
+
+ >>>>>  TEST FAILED  <<<<<
+  item: (testG.deckCount[nextPlayer] == G.deckCount[nextPlayer] - 1)
+  function: main
+  file: unittest2.c
+  line: 82
+
+
+ >>>>> Testing complete for: council_room <<<<<
+
+
+----------------- Testing Card: smithy ----------------
+
+  TEST: Refactored Function (very slow, but works)
+	hand count = 9, expected = 8
+	actions    = 1, expected = 1
+
+ >>>>>  TEST FAILED  <<<<<
+  item: (testG.handCount[thisPlayer] == G.handCount[thisPlayer] + newCards)
+  function: main
+  file: unittest3.c
+  line: 60
+
+ >>>>>  TEST PASSED  <<<<<
+  item: (testG.numActions == G.numActions)
+
+
+ >>>>> Testing complete for: smithy <<<<<
+
+
+----------------- Testing Card: village ----------------
+
+	TEST: Refactored Function
+	hand count = 7, expected = 6
+	deck count = 3, expected = 3
+	discarded  = 0, expected = 1
+	actions    = 3, expected = 3
+
+ >>>>>  TEST FAILED  <<<<<
+  item: (testG.handCount[thisPlayer] == G.handCount[thisPlayer] + newCards)
+  function: main
+  file: unittest4.c
+  line: 70
+
+ >>>>>  TEST FAILED  <<<<<
+  item: (testG.deckCount[thisPlayer] == G.deckCount[thisPlayer] - discarded + shuffledCards)
+  function: main
+  file: unittest4.c
+  line: 72
+
+ >>>>>  TEST FAILED  <<<<<
+  item: (testG.discardCount[thisPlayer] == G.discardCount[thisPlayer] + discarded)
+  function: main
+  file: unittest4.c
+  line: 74
+
+ >>>>>  TEST PASSED  <<<<<
+  item: (testG.numActions == G.numActions + actions)
+
+
+ >>>>> Testing complete for: village <<<<<
+
+
+----------------- Testing Card: adventurer ----------------
+
+	TEST: Testing in cardEffect
+  *Known bug will cause deck count to be 1 less than expected.
+	hand count = 9, expected = 7
+	deck count = 2, expected = 3
+	actions    = 1, expected = 1
+
+ >>>>>  TEST FAILED  <<<<<
+  item: (testG.handCount[thisPlayer] == G.handCount[thisPlayer] - newCards)
+  function: main
+  file: cardtest1.c
+  line: 61
+
+ >>>>>  TEST FAILED  <<<<<
+  item: (testG.deckCount[thisPlayer] + newCards == G.deckCount[thisPlayer] + newCards)
+  function: main
+  file: cardtest1.c
+  line: 63
+
+ >>>>>  TEST PASSED  <<<<<
+  item: (testG.numActions == G.numActions)
+
+
+ >>>>> Testing complete for: adventurer <<<<<
+
+
+----------------- Testing Card: smithy ----------------
+
+  TEST 1: Testing in cardEffect (very slow, but works)
+  *Tests to ensure the function discards.
+	hand count = 8, expected = 8
+	discarded  = 0, expected = 1
+	actions    = 1, expected = 1
+
+ >>>>>  TEST PASSED  <<<<<
+  item: (testG.handCount[thisPlayer] == G.handCount[thisPlayer] + newCards)
+
+ >>>>>  TEST FAILED  <<<<<
+  item: (testG.deckCount[thisPlayer] == G.deckCount[thisPlayer] - newCards)
+  function: main
+  file: cardtest2.c
+  line: 62
+
+ >>>>>  TEST PASSED  <<<<<
+  item: (testG.numActions == G.numActions)
+
+
+ >>>>> Testing complete for: smithy <<<<<
+
+----------------- Testing Card: great_hall ----------------
+  TEST: Expecting to gain 1 card to hand count and 1 action.
+	hand count = 4, expected = 6
+	deck count = 4, expected = 4
+	actions    = 3, expected = 2
+	discarded  = 0, expected = 1
+
+ >>>>>  TEST FAILED  <<<<<
+  item: (testG.handCount[thisPlayer] == G.handCount[thisPlayer])
+  function: main
+  file: cardtest3.c
+  line: 62
+
+ >>>>>  TEST PASSED  <<<<<
+  item: (testG.deckCount[thisPlayer] == G.deckCount[thisPlayer] - newCards)
+
+ >>>>>  TEST FAILED  <<<<<
+  item: (testG.numActions == G.numActions)
+  function: main
+  file: cardtest3.c
+  line: 64
+
+ >>>>>  TEST FAILED  <<<<<
+  item: (testG.discardCount[thisPlayer] == G.discardCount[thisPlayer]+1)
+  function: main
+  file: cardtest3.c
+  line: 65
+
+
+ >>>>> Testing complete for: great_hall <<<<<
+
+----------------- Testing Card: minion ----------------
+TEST 1: choice1 = 1 = +2 coins
+hand count = 4, expected = 4
+deck count = 5, expected = 5
+coin count = 6, expected = 6
+
+ >>>>>  TEST PASSED  <<<<<
+  item: (testG.handCount[thisPlayer] == G.handCount[thisPlayer] + newCards - discarded)
+
+ >>>>>  TEST PASSED  <<<<<
+  item: (testG.deckCount[thisPlayer] == G.deckCount[thisPlayer] - newCards)
+
+ >>>>>  TEST PASSED  <<<<<
+  item: (testG.coins == G.coins + xtraCoins)
+
+
+TEST 2: choice2  = +4 cards
+hand count = 4, expected = 8
+deck count = 1, expected = 1
+coin count = 4, expected = 4
+
+ >>>>>  TEST FAILED  <<<<<
+  item: (testG.handCount[thisPlayer] == G.handCount[thisPlayer] + newCards - discarded)
+  function: main
+  file: cardtest4.c
+  line: 95
+
+ >>>>>  TEST PASSED  <<<<<
+  item: (testG.deckCount[thisPlayer] == G.deckCount[thisPlayer] - newCards)
+
+ >>>>>  TEST PASSED  <<<<<
+  item: (testG.coins == G.coins + xtraCoins)
+
+
+ >>>>> Testing complete for: minion <<<<<
+
+File 'unittest1.c'
+Lines executed:100.00% of 22
+Branches executed:100.00% of 4
+Taken at least once:50.00% of 4
+Calls executed:83.33% of 12
+Creating 'unittest1.c.gcov'
+
+File 'unittest2.c'
+Lines executed:100.00% of 34
+Branches executed:100.00% of 10
+Taken at least once:50.00% of 10
+Calls executed:77.27% of 22
+Creating 'unittest2.c.gcov'
+
+File 'unittest3.c'
+Lines executed:100.00% of 20
+Branches executed:100.00% of 4
+Taken at least once:50.00% of 4
+Calls executed:83.33% of 12
+Creating 'unittest3.c.gcov'
+
+File 'unittest4.c'
+Lines executed:100.00% of 31
+Branches executed:100.00% of 8
+Taken at least once:50.00% of 8
+Calls executed:77.78% of 18
+Creating 'unittest4.c.gcov'
+
+File 'cardtest1.c'
+Lines executed:100.00% of 24
+Branches executed:100.00% of 6
+Taken at least once:50.00% of 6
+Calls executed:81.25% of 16
+Creating 'cardtest1.c.gcov'
+
+File 'cardtest2.c'
+Lines executed:100.00% of 24
+Branches executed:100.00% of 6
+Taken at least once:50.00% of 6
+Calls executed:81.25% of 16
+Creating 'cardtest2.c.gcov'
+
+File 'cardtest3.c'
+Lines executed:100.00% of 28
+Branches executed:100.00% of 8
+Taken at least once:50.00% of 8
+Calls executed:77.78% of 18
+Creating 'cardtest3.c.gcov'
+
+File 'cardtest4.c'
+Lines executed:100.00% of 45
+Branches executed:100.00% of 12
+Taken at least once:50.00% of 12
+Calls executed:77.78% of 27
+Creating 'cardtest4.c.gcov'
+
