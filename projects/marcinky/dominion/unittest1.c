@@ -18,6 +18,11 @@
 #include "rngs.h"
 #include <stdlib.h>
 
+// Custom Assert MACRO so that .gcda is generated 
+//(program needs to execute to completion)
+#define STR(x) #x
+#define MY_ASSERT(x)if(!(x)){printf(" >>>>>  TEST FAILED  <<<<<\n  item: (%s)\n  function: %s\n  file: %s\n  line: %d\n\n", STR(x),__PRETTY_FUNCTION__,__FILE__,__LINE__);}else{printf(" >>>>>  TEST PASSED  <<<<<\n  item: (%s)\n\n", STR(x));}
+
 #define TESTCARD "adventurer"
 
 int main() 
@@ -39,8 +44,6 @@ int main()
 
 	// ----------- TEST: Refactored Function --------------
 	printf("\n	TEST: Refactored Function\n");
-	printf("  *Known bug should cause hand count to be\n");
-	printf("   larger than expected by 1.\n");
 
 	// copy the game state to a test case
 	memcpy(&testG, &G, sizeof(struct gameState));
@@ -58,13 +61,13 @@ int main()
 
 	// assert statements
 	printf("\n");
-	assert(testG.handCount[thisPlayer] - newCards ==
+	MY_ASSERT(testG.handCount[thisPlayer] - newCards ==
 		G.handCount[thisPlayer] + newCards);
-	assert(testG.deckCount[thisPlayer] + newCards ==
+	MY_ASSERT(testG.deckCount[thisPlayer] + newCards ==
 		G.deckCount[thisPlayer] - newCards);
 
 	// print success if test passed
-	printf("\n >>>>> SUCCESS: Testing complete %s <<<<<\n\n", TESTCARD);
+	printf("\n >>>>> Testing complete for: %s <<<<<\n\n", TESTCARD);
 
 	return 0;
 }

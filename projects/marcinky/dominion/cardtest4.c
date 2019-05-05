@@ -16,6 +16,11 @@
 #include "rngs.h"
 #include <stdlib.h>
 
+// Custom Assert MACRO so that .gcda is generated 
+//(program needs to execute to completion)
+#define STR(x) #x
+#define MY_ASSERT(x)if(!(x)){printf(" >>>>>  TEST FAILED  <<<<<\n  item: (%s)\n  function: %s\n  file: %s\n  line: %d\n\n", STR(x),__PRETTY_FUNCTION__,__FILE__,__LINE__);}else{printf(" >>>>>  TEST PASSED  <<<<<\n  item: (%s)\n\n", STR(x));}
+
 #define TESTCARD "minion"
 
 int main() 
@@ -55,9 +60,10 @@ int main()
 	printf("coin count = %d, expected = %d\n", testG.coins, G.coins + xtraCoins);
 
 	// assert statements
-	assert(testG.handCount[thisPlayer] == G.handCount[thisPlayer] + newCards - discarded);
-	assert(testG.deckCount[thisPlayer] == G.deckCount[thisPlayer] - newCards);
-	assert(testG.coins == G.coins + xtraCoins);
+	printf("\n");
+	MY_ASSERT(testG.handCount[thisPlayer] == G.handCount[thisPlayer] + newCards - discarded);
+	MY_ASSERT(testG.deckCount[thisPlayer] == G.deckCount[thisPlayer] - newCards);
+	MY_ASSERT(testG.coins == G.coins + xtraCoins);
 
 	// ----------- TEST 2: choice2  = +4 cards --------------
 	printf("\nTEST 2: choice2  = +4 cards\n");
@@ -86,12 +92,12 @@ int main()
 */
 	// assert statements
 	printf("\n");
-	assert(testG.handCount[thisPlayer] == G.handCount[thisPlayer] + newCards - discarded);
-	assert(testG.deckCount[thisPlayer] == G.deckCount[thisPlayer] - newCards);
-	assert(testG.coins == G.coins + xtraCoins);
+	MY_ASSERT(testG.handCount[thisPlayer] == G.handCount[thisPlayer] + newCards - discarded);
+	MY_ASSERT(testG.deckCount[thisPlayer] == G.deckCount[thisPlayer] - newCards);
+	MY_ASSERT(testG.coins == G.coins + xtraCoins);
 
 	// print success if test passed
-	printf("\n >>>>> SUCCESS: Testing complete %s <<<<<\n\n", TESTCARD);
+	printf("\n >>>>> Testing complete for: %s <<<<<\n\n", TESTCARD);
 
 	return 0;
 }

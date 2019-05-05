@@ -16,6 +16,11 @@
 #include "rngs.h"
 #include <stdlib.h>
 
+// Custom Assert MACRO so that .gcda is generated 
+//(program needs to execute to completion)
+#define STR(x) #x
+#define MY_ASSERT(x)if(!(x)){printf(" >>>>>  TEST FAILED  <<<<<\n  item: (%s)\n  function: %s\n  file: %s\n  line: %d\n\n", STR(x),__PRETTY_FUNCTION__,__FILE__,__LINE__);}else{printf(" >>>>>  TEST PASSED  <<<<<\n  item: (%s)\n\n", STR(x));}
+
 #define TESTCARD "adventurer"
 
 int main() 
@@ -36,8 +41,7 @@ int main()
 
 	// ----------- TEST: Testing in cardEffect --------------
 	printf("\n	TEST: Testing in cardEffect\n");
-	printf("  *Known bug will cause deck count to\n");
-	printf("   be 1 less than expected.\n");
+	printf("  *Known bug will cause deck count to be 1 less than expected.\n");
 
 	// copy the game state to a test case
 	memcpy(&testG, &G, sizeof(struct gameState));
@@ -54,14 +58,13 @@ int main()
 
 	// assert statements
 	printf("\n");
-	assert(testG.handCount[thisPlayer] == G.handCount[thisPlayer] - newCards);
-	assert(testG.deckCount[thisPlayer] + newCards ==  G.deckCount[thisPlayer] + newCards);
-	assert(testG.numActions == G.numActions);
+	MY_ASSERT(testG.handCount[thisPlayer] == G.handCount[thisPlayer] - newCards);
+	MY_ASSERT(testG.deckCount[thisPlayer] + newCards == 
+		G.deckCount[thisPlayer] + newCards);
+	MY_ASSERT(testG.numActions == G.numActions);
 
 	// print success if test passed
-	printf("\n >>>>> SUCCESS: Testing complete %s <<<<<\n\n", TESTCARD);
+	printf("\n >>>>> Testing complete for: %s <<<<<\n\n", TESTCARD);
 
 	return 0;
 }
-
-
