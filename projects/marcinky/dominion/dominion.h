@@ -9,6 +9,7 @@
 #define MAX_PLAYERS 4
 
 #define DEBUG 0
+#define SLP 2
 
 /* http://dominion.diehrstraits.com has card texts */
 /* http://dominion.isotropic.org has other stuff */
@@ -127,5 +128,17 @@ int scoreFor(int player, struct gameState *state);
 int getWinners(int players[MAX_PLAYERS], struct gameState *state);
 /* Set array position of each player who won (remember ties!) to
    1, others to 0 */
+
+// ----- From Refactored Functions for Assn3 -------------------- 
+int caseAdventurer(int currentPlayer, struct gameState *state, int handPos, int *temphand);
+
+int caseCouncil(int currentPlayer, struct gameState *state, int handPos);
+
+int caseSmithy(int currentPlayer, struct gameState *state, int handPos);
+
+int caseVillage(int currentPlayer, struct gameState *state, int handPos);
+
+int caseGreathall(int currentPlayer, struct gameState *state, int handPos);
+
 
 #endif

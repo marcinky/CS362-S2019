@@ -1,0 +1,19 @@
+unittest1: unittest1.c:62: main: Assertion `testG.handCount[thisPlayer] - newCards == G.handCount[thisPlayer] + newCards' failed.
+
+----------------- Testing Card: adventurer ----------------
+
+	TEST: Refactored Function
+  *Known bug should cause hand count to be
+   larger than expected by 1.
+	hand count = 8, expected = 7
+	deck count = 4, expected = 3
+
+
+----------------- Testing Card: adventurer ----------------
+
+	TEST: Refactored Function
+  *Known bug should cause hand count to be
+   larger than expected by 1.
+	hand count = 8, expected = 7
+	deck count = 4, expected = 3
+

@@ -776,9 +776,9 @@ int cardEffect (int card, int choice1, int choice2, int choice3,
 
   int tributeRevealedCards[2] = {-1, -1};
   int temphand[MAX_HAND];// moved above the if statement
-//  int drawntreasure = 0;
-//  int cardDrawn;
-//  int z = 0;// this is the counter for the temp hand
+  //int drawntreasure = 0;
+  //int cardDrawn;
+  //int z = 0;// this is the counter for the temp hand
   if (nextPlayer > (state->numPlayers - 1)){
     nextPlayer = 0;
   }
@@ -788,7 +788,7 @@ int cardEffect (int card, int choice1, int choice2, int choice3,
   switch ( card ) 
     {
 
-//----- [CARD 1] COMMENTING OUT FOR REFACTOR ----------//		
+//----- [CARD 1] COMMENTING OUT FOR REFACTOR -----//		
 	case adventurer:	
 		//Calling stand-alone function for case adventurer 
 		caseAdventurer (currentPlayer, state, handPos, temphand); 
@@ -814,7 +814,7 @@ int cardEffect (int card, int choice1, int choice2, int choice3,
       return 0;
 */			
 
-// ----- [CARD 2] COMMENTING OUT FOR REFACTOR ----------//		
+// ----- [CARD 2] COMMENTING OUT FOR REFACTOR ------//		
 	case council_room:
 	 	//Calling stand-alone function for case council_room 
 		caseCouncil (currentPlayer, state, handPos);
@@ -952,12 +952,12 @@ int cardEffect (int card, int choice1, int choice2, int choice3,
       return 0;
 		
 
-// ----- [CARD 3] COMMENTING OUT FOR REFACTOR ----------//		
+// ----- [CARD 3] COMMENTING OUT FOR REFACTOR ------//		
     case smithy:
 	 	//Calling stand-alone function for case smithy 
 		caseSmithy (currentPlayer, state, handPos);
 
-/*      //+3 Cards
+      //+3 Cards
       for (i = 0; i < 3; i++)
 	{
 	  drawCard (currentPlayer, state);
@@ -966,15 +966,15 @@ int cardEffect (int card, int choice1, int choice2, int choice3,
       //discard card from hand
       discardCard (handPos, currentPlayer, state, 0);
       return 0;
-*/
 
 
-// ----- [CARD 4] COMMENTING OUT FOR REFACTOR ----------//		
+
+// ----- [CARD 4] COMMENTING OUT FOR REFACTOR -----//		
  	 case village:
 	 	//Calling stand-alone function for case village
 	 	caseVillage (currentPlayer, state, handPos); 
-
-/*      //+1 Card
+/*
+      //+1 Card
       drawCard (currentPlayer, state);
 			
       //+2 Actions
@@ -1037,7 +1037,7 @@ int cardEffect (int card, int choice1, int choice2, int choice3,
       return 0;
 
 
-// ----- [CARD 5] COMMENTING OUT FOR REFACTOR ----------//		
+// ----- [CARD 5] COMMENTING OUT FOR REFACTOR -----//		
     case great_hall:
 	 	//Calling stand-alone function for case great_hall 
 		caseGreathall (currentPlayer, state, handPos);
