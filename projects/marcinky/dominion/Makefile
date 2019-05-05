@@ -48,8 +48,14 @@ unittestresults: unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 car
 	./cardtest2 >> unittestresults.out
 	./cardtest3 >> unittestresults.out
 	./cardtest4 >> unittestresults.out
-	gcov dominion.c >> unittestresults.out
-	cat dominion.c.gcov >> unittestresults.out
+	gcov -b unittest1.c >> unittestresults.out
+	gcov -b unittest2.c >> unittestresults.out
+	gcov -b unittest3.c >> unittestresults.out
+	gcov -b unittest4.c >> unittestresults.out
+	gcov -b cardtest1.c >> unittestresults.out
+	gcov -b cardtest2.c >> unittestresults.out
+	gcov -b cardtest3.c >> unittestresults.out
+	gcov -b cardtest4.c >> unittestresults.out
 
 #--- End for assignment 3 ---
 
@@ -75,5 +81,6 @@ player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
 all: playdom player unittestresults 
+#unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4 
 
 clean: rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
