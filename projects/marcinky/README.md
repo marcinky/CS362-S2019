@@ -1,2 +1,2 @@
 #Yvonne Marcinko, marcinky
-This is my assignment-3 submission! 
+This is the Random Testing (RT) Quiz Submission!
