@@ -1,0 +1,143 @@
+        -:    0:Source:randomtestcard2.c
+        -:    0:Graph:randomtestcard2.gcno
+        -:    0:Data:randomtestcard2.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1:/**********************************************************************
+        -:    2: ** Program: randomtestcard2.c
+        -:    3: ** Author: Yvonne Marcinko
+        -:    4: ** Date: 5/19/2019
+        -:    5: ** Description: Random test for dominion.c council room implementation.
+        -:    6: **		Expected behavior: +4 card, +1 buy, other player +1 card 
+        -:    7: *********************************************************************/
+        -:    8:
+        -:    9:#include"dominion.h"
+        -:   10:#include"dominion_helpers.h"
+        -:   11:#include"rngs.h"
+        -:   12:#include<assert.h>
+        -:   13:#include<stdio.h>
+        -:   14:#include<stdlib.h>
+        -:   15:#include<string.h>
+        -:   16:#include<time.h>
+        -:   17:
+        -:   18:#define TESTCARD "council_room"
+        -:   19:#define MAX_RT 20000
+        -:   20:#define MAX_SD 100
+        -:   21:#define PEEPS 4
+        -:   22:
+function printFail called 0 returned 0% blocks executed 0%
+    #####:   23:void printFail()
+        -:   24:{
+    #####:   25:	printf("\n >>>>> [%s card] TEST FAILED <<<<<\n\n", TESTCARD);
+call    0 never executed
+    #####:   26:	exit(200);
+        -:   27:}
+        -:   28:
+        -:   29:
+function main called 2 returned 100% blocks executed 87%
+        2:   30:int main() 
+        -:   31:{
+        -:   32:	//set rand
+        2:   33:	srand(time(NULL));
+call    0 returned 100%
+call    1 returned 100%
+        -:   34:	
+        -:   35:	//variables
+        2:   36:	int choice1=1, choice2=1, choice3=1;
+        2:   37:	int handpos = 0;
+        2:   38:	int bonus = 0;
+        2:   39:	int thisPlayer = 0;
+        2:   40:	int nextPlayer = 0;
+        -:   41:	int numPlayers, a, i, seed;
+        2:   42:	int newCards = 4;	//expect to gain 4 cards
+        2:   43:	int opNewCards = 1; //other player draws one card
+        2:   44:	int discarded = 1;//expect to discard the card after play
+        -:   45:
+        -:   46:	//create gamestate 
+        -:   47:	struct gameState G, testG;
+        -:   48:
+        -:   49:	//each player starts with 10 cards
+        2:   50:	int k[10] = {adventurer, embargo, village, minion, mine, cutpurse, 
+        -:   51:		sea_hag, tribute, smithy, council_room};
+        -:   52:
+        -:   53:	// -------------------- BEGIN RANDOM TEST -------------------- // 
+        2:   54:	printf("\n---------- Begin Random Test for Card: %s ----------\n", TESTCARD);
+call    0 returned 100%
+        -:   55:	
+        2:   56:	seed = rand();
+call    0 returned 100%
+        2:   57:	a = 0;
+        -:   58:
+    40004:   59:	for(i = 0; i < MAX_RT + 1; i++)
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+        -:   60:	{	//randomize values 
+    40002:   61:		numPlayers = (rand() % PEEPS + 1);
+call    0 returned 100%
+        -:   62:
+    40002:   63:		printf("\n %s Run#%d numPlayers: %d", TESTCARD, a, numPlayers);
+call    0 returned 100%
+        -:   64:
+        -:   65:		//initialize game state 
+    40002:   66:		initializeGame(numPlayers, k, seed, &G);
+call    0 returned 100%
+        -:   67:
+        -:   68:		//copy the game state to a test case
+    40002:   69:		memcpy(&testG, &G, sizeof(struct gameState));
+        -:   70:	
+        -:   71:		//call card in function
+    40002:   72:		cardEffect(adventurer, choice1, choice2, choice3, &testG, handpos, &bonus);
+call    0 returned 100%
+        -:   73:
+        -:   74:		//check number of buys executed 
+    80004:   75:		printf("\n #buys count %d, expected %d\n", 
+call    0 returned 100%
+    40002:   76:			testG.numBuys - opNewCards, 
+        -:   77:			G.numBuys);
+        -:   78:
+    40002:   79:		if(testG.numBuys - opNewCards != G.numBuys)
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+        -:   80:		{
+    #####:   81:			printFail();
+call    0 never executed
+        -:   82:		}
+        -:   83:	
+        -:   84:		//check hand count for current player
+    80004:   85:		printf(" hand count %d, expected %d\n",
+call    0 returned 100%
+    40002:   86:			testG.handCount[thisPlayer] - discarded, 
+    40002:   87:			G.handCount[thisPlayer] + newCards - discarded);
+        -:   88:
+    80004:   89:		if(testG.handCount[thisPlayer] - discarded != 
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+    40002:   90:			G.handCount[thisPlayer] + newCards - discarded)
+        -:   91:		{
+    #####:   92:			printFail();
+call    0 never executed
+        -:   93:		}
+        -:   94:
+        -:   95:		//check hand count for next player
+    80004:   96:		printf(" next player hand count = %d, expected = %d\n", 
+call    0 returned 100%
+    40002:   97:			testG.handCount[nextPlayer] - newCards, 
+        -:   98:			G.handCount[nextPlayer]);
+        -:   99:	
+    40002:  100:		if(testG.handCount[nextPlayer] - newCards != G.handCount[nextPlayer])
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+        -:  101:		{
+    #####:  102:			printFail();
+call    0 never executed
+        -:  103:		}
+        -:  104:
+    40002:  105:		a++;
+        -:  106:	}
+        -:  107:
+        -:  108:	//print success if test passed
+        2:  109:	printf("\n >>>>> Random Testing PASSED for: %s <<<<<\n\n", TESTCARD);
+call    0 returned 100%
+        -:  110:
+        2:  111:	return 0;
+        -:  112:}

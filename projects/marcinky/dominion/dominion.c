@@ -741,7 +741,7 @@ int getCost (int cardNumber)
 			
       //Discard played card from hand
       drawCard (currentPlayer, state);/* -->BUG HERE<-- */
-      //discardCard (handPos, currentPlayer, state, 0);/* -->BUG HERE<-- */
+      //discardCard (handPos, currentPlayer, state, 0);/* -->ORIGINAL HERE<-- */
       return 0;
 	}
 
