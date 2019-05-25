@@ -47,7 +47,7 @@ int main()
 	memcpy(&testG, &G, sizeof(struct gameState));
 	
 	// call card in refactored function
-	caseSmithy(thisPlayer, &testG, handpos);
+	smithyRefactor(handpos, &testG);
 
 	// print expectations
 	printf("	hand count = %d, expected = %d\n", 

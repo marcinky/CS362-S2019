@@ -51,7 +51,7 @@ int main()
 	memcpy(&testG, &G, sizeof(struct gameState));
 	
 	// call card in cardEffect function
-	caseCouncil(thisPlayer, &testG, handpos);
+	councilRoomRefactor(handpos, &testG);
 
 	// print expectations
 	printf("	hand count = %d, expected = %d\n", 
