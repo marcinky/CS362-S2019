@@ -1,2 +1,2 @@
 #Yvonne Marcinko, marcinky
-This is my assignment-3 submission! 
+This is the group's FinalProject-PartA submission!
