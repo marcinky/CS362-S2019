@@ -42,7 +42,70 @@ public class UrlValidatorTest extends TestCase {
         assertFalse(url.isValid("http://apple.com:-1/path"));
         assertFalse(url.isValid("http://apple.com:-20000/path"));
         assertFalse(url.isValid("http://apple.com:-65535/path"));
+	assertFalse(url.isValid("http://apple.com:-99999/path"));
+	assertFalse(url.isValid("http://apple.com:99999/path"));
     }
-
+	
+	public void testScheme(){
+		UrlValidator url = new UrlValidator();
+		assertTrue(url.isValid("http://apple.com:0/path"));
+		assertTrue(url.isValid("ftp://apple.com:0/path"));
+		assertTrue(url.isValid("h3t://apple.com:0/path"));
+		assertFalse(url.isValid("3ht://apple.com:0/path"));
+		assertFalse(url.isValid("http:/apple.com:0/path"));
+		assertFalse(url.isValid("http:apple.com:0/path"));
+		assertFalse(url.isValid("http/apple.com:0/path"));
+		assertFalse(url.isValid("://apple.com:0/path"));
+		assertFalse(url.isValid("apple.com:0/path"));
+		assertFalse(url.isValid("htp://apple.com:0/path"));
+		assertFalse(url.isValid("thtp://apple.com:0/path"));
+	}
+	
+	public void testAuthority(){
+		UrlValidator url = new UrlValidator();
+		assertTrue(url.isValid("http://apple.com:0/path"));
+		assertTrue(url.isValid("http://ap.com:0/path"));
+		assertTrue(url.isValid("http://apple.ca:0/path"));
+		assertTrue(url.isValid("http://0.0.0.0:0/path"));
+		assertTrue(url.isValid("http://255.255.255.255:0/path"));
+		assertTrue(url.isValid("http://256.com:0/path"));
+		assertTrue(url.isValid("http://ap.cc:0/path"));
+		assertFalse(url.isValid("http://256.256.256.256:0/path"));
+		assertFalse(url.isValid("http://256.0.0.0:0/path"));
+		assertFalse(url.isValid("http://0.0.0.0.0:0/path"));
+		assertFalse(url.isValid("http://0.0.0.0.:0/path"));
+		assertFalse(url.isValid("http://0.0.0:0/path"));
+		assertFalse(url.isValid("http://.0.0.0.0:0/path"));
+		assertFalse(url.isValid("http://apple.c:0/path"));
+		assertFalse(url.isValid("http://apple.ala:0/path"));
+		assertFalse(url.isValid("http://apple.laa:0/path"));
+		assertFalse(url.isValid("http://apple.:0/path"));
+		assertFalse(url.isValid("http://.apple:0/path"));
+		assertFalse(url.isValid("http://apple:0/path"));
+		assertFalse(url.isValid("http://:0/path"));
+	}
+	
+	public void testPath(){
+		UrlValidator url = new UrlValidator();
+		assertTrue(url.isValid("http://apple.com:0/path"));
+		assertTrue(url.isValid("http://apple.com:0/t123"));
+		assertTrue(url.isValid("http://apple.com:0/$23"));
+		assertTrue(url.isValid("http://apple.com:0//path/"));
+		assertTrue(url.isValid("http://apple.com:0"));
+		assertTrue(url.isValid("http://apple.com:0/path/file"));
+		assertFalse(url.isValid("http://apple.com:0/.."));
+		assertFalse(url.isValid("http://apple.com:0/../"));
+		assertFalse(url.isValid("http://apple.com:0/../file"));
+		assertFalse(url.isValid("http://apple.com:0/..//file"));
+		assertFalse(url.isValid("http://apple.com:0/path//file"));
+	}
+	
+	public void testQuery(){
+		UrlValidator url = new UrlValidator();
+		assertTrue(url.isValid("http://apple.com:0/path?action=view"));
+		assertTrue(url.isValid("http://apple.com:0/path?action=edit&mode=up"));
+		assertTrue(url.isValid("http://apple.com:0/path"));
+		assertFalse(url.isValid("http://apple.com:0/path?atcion=view"));
+	}
 
 }
